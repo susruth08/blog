@@ -37,9 +37,10 @@
 
 <hr>
 {% if comments|length > 0%}
-	<p>comments</p>
+	<h4>Comments</h4>
 	{% for comment in comments %}
 	<p>{{ comment.description }}</p>
+	<hr>
 	{% endfor %}
 {% endif %}
 
@@ -49,7 +50,7 @@
 			{% csrf_token %}
 			<input type="hidden" name="post_id" value="{{ post.id }}">
 			<div class="form-group">
-				<textarea name="comment" rows="8" style="width:100%" placeholder="Comments ..."></textarea>
+				<textarea name="comment" rows="8" style="width:100%" placeholder="Comments ..." required></textarea>
 			</div>
 
 			<input type="submit" value="Add Comment" class="btn btn-secondary btn-block">
@@ -58,8 +59,9 @@
 </div>
 
 	<div class="col-4">
-		<button type="button" name="button" onclick='show_liked()'>Liked By</button>
-		<button type="button" name="button"  onclick='show_disliked()'>Disliked By</button>
+		<button type="button" name="button" class="btn btn-info" onclick='show_liked()'>Liked By</button>
+		<button type="button" name="button" class="btn btn-warning" onclick='show_disliked()'>Disliked By</button>
+		<hr>
 		<p id="likes_text">Showing Results For Liked By</p>
 		<div id='liked_by' >
 			{% for l in liked_by %}

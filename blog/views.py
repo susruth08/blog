@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate,logout as auth_logout,login as auth
 from posts.models import Post
 from responses.models import Response
 from comments.models import Comment
+from django.db.models import Max
 
 
 
@@ -84,9 +85,6 @@ def analytics(request):
         else:
             max_dislikes_post = 0
 
-
-
-
         comments = Comment.objects.filter(post__in=posts).values('post')
         comments = [c['post'] for c in comments]
         if len(comments) > 0:
@@ -94,16 +92,15 @@ def analytics(request):
             max_comments_post = Post.objects.get(id=max_comments_post)
         else:
             max_comments_post=0
-
+        id = Post.objects.filter(author=request.user).values('views', 'id').annotate(Max('views')).first()['id']
+        max_views_post = Post.objects.get(id=id)
 
 
         context = {
         "max_likes_post": max_likes_post,
         "max_dislikes_post": max_dislikes_post,
-        "max_comments_post": max_comments_post
+        "max_comments_post": max_comments_post,
+        "max_views_post": max_views_post
         }
-
-
-
 
     return render(request, 'blog/analytics.html', context)

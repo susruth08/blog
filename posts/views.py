@@ -20,6 +20,8 @@ def new(request):
 def show(request, *args, **kwargs):
     id = kwargs['id']
     post = Post.objects.get(id=id)
+    post.views = post.views + 1
+    post.save()
     comments = Comment.objects.filter(post=post)
     if request.user.is_authenticated:
         response = Response.objects.filter(post=post, user=request.user).first()

@@ -9,3 +9,4 @@ class Response(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     liked = models.BooleanField(default=False)
     disliked = models.BooleanField(default=False)
+    

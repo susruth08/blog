@@ -10,11 +10,11 @@
 		        <a class="nav-link" href="{% url 'log_out' %}">Logout </a>
 		      </li>
 
-					<li class="nav-item ">
-		        <a class="nav-link " href="{% url 'posts:new' %}">New Blog Post </a>
+					<li class="nav-item {% if request.path == '/posts/new'%}active{% endif %}" >
+		        <a class="nav-link " href="{% url 'posts:new' %}"  >New Blog Post </a>
 		      </li>
 
-          <li class="nav-item">
+          <li class="nav-item {% if request.path == '/my_blogs/'  %} active {% endif %} {% if request.path == '/analytics/'  %} active {% endif %} "  >
   	        <a class="nav-link" href="{% url 'my_blogs' %}">Dashboard</a>
   	      </li>
 			{% else %}
