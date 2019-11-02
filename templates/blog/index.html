@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='container'>
+  {% for post in posts %}
+	<a href="{% url 'posts:show' id=post.id %}">{{ post.title }}</a>
+  <p>{{ post.description|truncatechars:100 }}</p>
+	<b>by {{ post.author }}</b>
+	<hr>
+	{% endfor %}
+</div>
+{% endblock %}

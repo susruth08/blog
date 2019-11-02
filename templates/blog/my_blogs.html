@@ -1,0 +1,16 @@
+{% extends "blog/dashboard.html" %}
+{% load response_extras %}
+
+  {% block data%}
+  <center><h3>My Blogs</h3></center>
+  {% for post in posts %}
+    <h5>{{ post.title }}</h5>
+    <p>{{ post.description|truncatechars:100 }}</p>
+    <div class='row'>
+      <div class='col'><b>Total Comments:</b> {{ post.comment_set.count }}</div>
+      <div class='col'><b>Likes:</b> {{ post.response_set.all|likes_count }}</div>
+      <div class='col'><b>Dislikes:</b> {{ post.response_set.all|dislikes_count }}</div>
+    </div>
+  	<hr>
+  {% endfor  %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "blog/dashboard.html" %}
+
+{% block data%}
+<center><h3>Analytics</h3></center>
+<h5>Most Liked Post: </h5>
+ <b>{{ max_likes_post.title}}</b>
+ <p>{{ max_likes_post.description|truncatechars:100}}</p>
+<hr>
+<h5>Most DisLiked Post: </h5>
+<b>{{ max_dislikes_post.title}}</b>
+<p>{{ max_dislikes_post.description|truncatechars:100}}</p>
+<hr>
+<h5>Most Comments Post: </h5>
+<b>{{ max_comments_post.title}}</b>
+<p>{{ max_comments_post.description|truncatechars:100}}</p>
+<hr>
+{% endblock %}

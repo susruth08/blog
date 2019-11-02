@@ -1,0 +1,69 @@
+{% if response.liked == True %}
+	<button style="color:blue" class='btn btn-link' id='like_text'>Liked</button>
+	<button type="button"  class="btn btn-danger" id='dislike_button'  onclick="dislike({{ post.id}})">DisLike</button>
+
+	<button type="button"  class="btn btn-success" id='like_button' style='display:none' onclick="like({{ post.id}})">Like</button>
+	<button style="color:red;display:none" id='dislike_text'  class='btn btn-link' >DisLiked</button>
+
+
+{% elif response.disliked == True %}
+
+  <button type="button" name="button" class="btn btn-success" id='like_button'  onclick="like({{ post.id}})">Like</button>
+	<button style="color:red" id='dislike_text' class='btn btn-link' >DisLiked</button>
+
+
+	<button  id='like_text' style='display:none' class='btn btn-link'>Liked</button>
+	<button type="button" name="button" class="btn btn-danger" id='dislike_button' style='display:none' onclick="dislike({{ post.id}})">DisLike</button>
+{% endif %}
+
+
+
+<script type="text/javascript">
+	function like(id) {
+		data = {id: id}
+		headers= { "X-CSRFToken": '{{csrf_token}}' }
+		$.ajax({
+
+		    url : '{% url "posts:like" %}',
+		    type : 'post',
+		    data : data,
+				headers: headers,
+		    success : function(data) {
+		        $("#like_text").show()
+						$("#like_button").hide()
+						$("#dislike_text").hide()
+						$("#dislike_button").show()
+
+		    },
+		    error : function(request,error)
+		    {
+
+		    }
+   });
+
+	}
+
+
+	function dislike(id) {
+		data = {id: id}
+		headers= { "X-CSRFToken": '{{csrf_token}}' }
+		$.ajax({
+
+				url : '{% url "posts:dislike" %}',
+				type : 'post',
+				data : data,
+				headers: headers,
+				success : function(data) {
+					$("#like_text").hide()
+					$("#like_button").show()
+					$("#dislike_text").show()
+					$("#dislike_button").hide()
+				},
+				error : function(request,error)
+				{
+						alert("Request: "+JSON.stringify(request));
+				}
+	 });
+
+	}
+</script>
