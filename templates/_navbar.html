@@ -1,4 +1,6 @@
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
   <a class="navbar-brand" href="{% url 'index' %}">Blog</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -26,5 +28,17 @@
 	      </li>
 			{% endif %}
     </ul>
+    <ul class="navbar-nav ml-auto" >
+      {% if request.user.is_authenticated %}
+          <li>
+            <b>Hi, {{request.user}}</b>
+          </li>
+      {% else %}
+      <li>
+        <b>Please Login</b>
+      </li>
+      {% endif %}
+      </ul>
+  </div>
   </div>
 </nav>

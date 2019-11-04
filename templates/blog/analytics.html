@@ -1,23 +1,44 @@
 {% extends "blog/dashboard.html" %}
 
 {% block data%}
-<center><h3>Analytics</h3></center>
+<center><h3>Analytics For My Blogs</h3></center>
 
 <b>Most Liked Post: </b>
+{% if max_likes_post %}
  <h4><a href="{% url 'posts:show' max_likes_post.id  %}">{{ max_likes_post.title}}</a></h4>
  <p>{{ max_likes_post.description|truncatechars:100}}</p>
-<hr>
-<b>Most DisLiked Post: </b>
-<h4><a href="{% url 'posts:show' max_dislikes_post.id  %}">{{ max_dislikes_post.title}}</a></h4>
-<p>{{ max_dislikes_post.description|truncatechars:100}}</p>
-<hr>
-<b>Most Comments Post: </b>
-<h4><a href="{% url 'posts:show' max_comments_post.id  %}">{{ max_comments_post.title}}</a></h4>
-<p>{{ max_comments_post.description|truncatechars:100}}</p>
+{% else %}
+<p>No Posts Yet</p>
+{% endif %}
 <hr>
 
-<b>Most Viewed Post: </b>
-<h4><a href="{% url 'posts:show' max_views_post.id  %}">{{ max_views_post.title}}</a></h4>
-<p>{{ max_views_post.description|truncatechars:100}}</p>
+<b>Most DisLiked Post: </b>
+{% if max_dislikes_post %}
+<h4><a href="{% url 'posts:show' max_dislikes_post.id  %}">{{ max_dislikes_post.title}}</a></h4>
+<p>{{ max_dislikes_post.description|truncatechars:100}}</p>
+{% else %}
+<p>No Posts Yet</p>
+{% endif %}
 <hr>
+
+<b>Most Comments Post: </b>
+{% if max_comments_post %}
+<h4><a href="{% url 'posts:show' max_comments_post.id  %}">{{ max_comments_post.title}}</a></h4>
+<p>{{ max_comments_post.description|truncatechars:100}}</p>
+{% else %}
+<p>No Posts Yet</p>
+{% endif %}
+<hr>
+
+
+<b>Most Viewed Post: </b>
+{% if max_views_post %}
+  <h4><a href="{% url 'posts:show' max_views_post.id  %}">{{ max_views_post.title}}</a></h4>
+  <p>{{ max_views_post.description|truncatechars:100}}</p>
+{% else %}
+<p>No Posts Yet</p>
+{% endif %}
+<hr>
+
+
 {% endblock %}

@@ -40,6 +40,7 @@
 	<h4>Comments</h4>
 	{% for comment in comments %}
 	<p>{{ comment.description }}</p>
+	<p class="text-right">comment by: {{ comment.user }}</p>
 	<hr>
 	{% endfor %}
 {% endif %}

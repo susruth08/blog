@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
+
+{% if messages %}
+  {% for msg in messages %}
+    <div class="alert alert-info alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      {{msg.message}}
+    </div>
+  {% endfor %}
+{% endif %}
+
+
 <div class='container'>
   {% for post in posts %}
 	<a href="{% url 'posts:show' id=post.id %}">{{ post.title }}</a>

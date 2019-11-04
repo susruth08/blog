@@ -14,4 +14,7 @@
     </div>
   	<hr>
   {% endfor  %}
+  {% if posts.count == 0%}
+    <b>No Blog Posts Yet</b>
+  {% endif %}
 {% endblock %}
